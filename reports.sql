@@ -42,7 +42,7 @@ select * from get_rides('Chelyabinsk', 'Yekaterinburg') as (
        , seats_offered smallint) ;
 
 
--- List of submitted / approved requests for a ride 
+-- List of approved requests for a ride 
 
 drop function approved_requests(ride_id int);
 
@@ -118,7 +118,7 @@ create or replace function list_co_travelers(r_id int)
 		     , request_status rs
 		    where m.id = req.requester_id 
 		      and rs.id = req.request_status_id
-		      and rs.description = 'APPROVED'
+		      and rs.id = 'APPROVED'
 		      and req.ride_id = r_id
 		UNION
 		select first_name || ' ' || last_name 

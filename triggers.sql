@@ -10,21 +10,15 @@ create table logs (
 );
 
 
--- Данный триггер должен сработать, когда 
--- введенная дата лицензии водителя уже просрочена, тогда
--- поднимается уведомление.
-
-
 
 drop function check_licence_valid() cascade;
-а, если завтра забивать очередь будут, то забивай нам на начало
 create or replace function check_licence_valid() 
 	returns trigger as $$
 begin
 	if new.driving_licence_valid_from < current_date then
 		insert into logs (table_name, last_operation, trigger_name, when_happen) 
 			values (tg_table_name, tg_op, tg_name, tg_when);
-		raise notice 'Bad expire date, check logs table.';								
+		raise notice 'Bad driver licence date, check logs table.';								
 	end if;
 	return new;
 end;
@@ -35,7 +29,7 @@ before insert or update
 	on member for each row execute procedure check_licence_valid();
 
 
--- После удаления модели машины информация заносится в logs.
+-- After deleting, information go to logs.
 
 drop function delete_ride() cascade;
 
@@ -49,6 +43,6 @@ begin
 end;
 $$ language plpgsql;
 
-create trigger delete_ride_logging
+create trigger 	
 before delete 
 	on ride execute procedure delete_ride();

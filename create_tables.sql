@@ -94,7 +94,6 @@ CREATE TABLE request (
     id serial,
     requester_id int  NOT NULL,
     ride_id int  NOT NULL,
-    enroute_city_id int  NULL,
     created_on timestamp without time zone  NOT NULL,
     request_status_id int  NOT NULL,
     CONSTRAINT request_pk PRIMARY KEY (id)

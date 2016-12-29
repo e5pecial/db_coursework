@@ -132,11 +132,10 @@ insert into request_status (
 insert into request (
     requester_id,
     ride_id,
-    enroute_city_id,
     created_on,
     request_status_id
-) values (2,1,3,'2016-12-04',2),
-         (2,3,1,'2016-12-13',3),
-         (7,4,4,'2016-12-02',3),
-         (8,4,4,'2016-12-10',1)
+) values (2,1,'2016-12-04',2),
+         (2,3,'2016-12-13',3),
+         (7,4,'2016-12-02',3),
+         (8,4,'2016-12-10',1)
 ;
